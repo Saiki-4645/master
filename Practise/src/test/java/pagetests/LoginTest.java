@@ -35,7 +35,7 @@ public class LoginTest {
         loginPage.login(username, password);
         logger.info("Trying to login.");
         assertTrue(loginPage.verifyLogin());
-        logger.info("Successfully Logged In.");
+        logger.info("Successfully Logged In.\n");
     }
 
     @After
