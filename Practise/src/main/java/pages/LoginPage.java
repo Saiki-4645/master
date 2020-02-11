@@ -22,7 +22,7 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//input[@value='LOGIN']")
     WebElement loginButton;
 
-    @FindBy(xpath="//div[text()='Products']")
+    @FindBy(xpath = "//div[text()='Products']")
     WebElement productsLabel;
 
     public void login(String username, String password) {
@@ -33,7 +33,7 @@ public class LoginPage extends BasePage {
         loginButton.click();
     }
 
-    public boolean verifyLogin(){
-        return productsLabel.isDisplayed()?true:false;
+    public boolean verifyLogin() {
+        return productsLabel.isDisplayed() ? true : false;
     }
 }

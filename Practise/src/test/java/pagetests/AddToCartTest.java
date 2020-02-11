@@ -5,20 +5,24 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
+import pages.HomePage;
 import pages.LoginPage;
 import utils.DriverFactory;
 import utils.LoggerUtil;
 
 import static org.junit.Assert.assertTrue;
 
-public class LoginTest {
+public class AddToCartTest {
     WebDriver driver;
     LoginPage loginPage;
+    HomePage homePage;
     Logger logger;
     String browserName = "chrome";
     String url = "https://www.saucedemo.com/";
     String username = "standard_user";
     String password = "secret_sauce";
+    String itemName = "T-shirt";
+    int itemCount = 2;
 
     @Before
     public void setup() {
@@ -27,15 +31,17 @@ public class LoginTest {
         driver.get(url);
         logger.info("Opened the Page.");
         loginPage = new LoginPage(driver);
-        logger.info("Initialised the Page.");
+        loginPage.login(username, password);
+        logger.info("Successfully Logged In.");
+        homePage = new HomePage(driver);
     }
 
     @Test
-    public void testLogin() {
-        loginPage.login(username, password);
-        logger.info("Trying to login.");
-        assertTrue(loginPage.verifyLogin());
-        logger.info("Successfully Logged In.\n");
+    public void testAddToCart() {
+        logger.info("Trying to add items to cart.");
+        int addedItemsCount = homePage.addToCart(itemName, itemCount);
+        logger.info("Added " + addedItemsCount + " " + itemName + "s to Cart.\n");
+        assertTrue(homePage.verifyItemsAreAddedToCart());
     }
 
     @After
